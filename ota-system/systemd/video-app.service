@@ -1,0 +1,25 @@
+[Unit]
+Description=Video Streaming Application (OTA-managed)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/app/current/bin
+ExecStart=/opt/app/current/bin/video_app
+
+# Restart policy
+Restart=on-failure
+RestartSec=5s
+
+# Resource limits
+LimitNOFILE=65536
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=video-app
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+[Unit]
+Description=OTA Update Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/local/bin/ota-update.sh
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ota-update
+
+[Install]
+WantedBy=multi-user.target

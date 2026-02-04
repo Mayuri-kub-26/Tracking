@@ -1,0 +1,21 @@
+#!/bin/bash
+# Post-installation script for video-app v2
+
+set -e
+
+echo "Installing video-app v2..."
+
+# Ensure directory structure exists
+mkdir -p /opt/app/metadata
+mkdir -p /var/cache/ota/downloads
+mkdir -p /var/cache/ota/logs
+
+# Set permissions
+chmod -R 755 /opt/app/v2
+chmod +x /opt/app/v2/bin/video_app
+
+# Create VERSION file
+echo "2.0.0" > /opt/app/v2/VERSION
+
+echo "video-app v2 installation complete"
+exit 0

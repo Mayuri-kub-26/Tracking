@@ -1,0 +1,66 @@
+# Application Configuration
+
+system:
+  mode: debug # debug | production
+  headless: false
+  
+camera:
+  # RTSP Configuration
+  # url: "rtsp://192.168.144.25:8554/main.264"
+  # For testing/dev without camera, we can use a file or default to 0 for webcam
+  url: "rtsp://192.168.145.25:8554/video2" 
+  width: 1280
+  height: 720
+  fps: 30
+  buffer_size: 1
+  latency: 0
+
+gimbal:
+  ip: "192.168.145.25"
+  port: 37260
+  # PID Controller Settings
+  pid:
+    yaw:
+      kp: 0.15
+      ki: 0.01
+      kd: 0.005
+    pitch:
+      kp: 0.15
+      ki: 0.01
+      kd: 0.005
+  deadzone: 20
+  move_interval: 0.05 # Seconds between gimbal commands
+
+detection:
+  enabled: true
+  model_path: "models/yolov10s.hef" # Placeholder
+  confidence_threshold: 0.5
+  nms_threshold: 0.45
+  labels_path: "labels/coco.txt"
+  target_classes:
+    - "person"
+    - "car"
+    - "truck"
+    - "bus"
+    - "bicycle"
+    - "motorcycle"
+
+tracking:
+  enabled: true
+  tracker_type: "MOSSE" # Options: "CSRT", "KCF", "MOSSE", "BYTE"
+  bytetracker:
+    track_thresh: 0.1
+    track_buffer: 30
+    match_thresh: 0.9
+    aspect_ratio_thresh: 2.0
+    min_box_area: 500
+    mot20: false
+  
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+stream:
+  type: "rtsp" # Options: "web", "rtsp"
+  rtsp_url: "rtsp://192.168.144.60:8554/video1" # Target URL for RTSP push
+  web_endpoint: "/video1" # Path for web streaming

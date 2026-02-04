@@ -1,0 +1,29 @@
+#!/bin/bash
+# Post-installation script for video-app v1
+
+set -e
+
+echo "Installing video-app v1..."
+
+# Ensure directory structure exists
+mkdir -p /opt/app/metadata
+mkdir -p /var/cache/ota/downloads
+mkdir -p /var/cache/ota/logs
+
+# Set permissions
+chmod -R 755 /opt/app/v1
+chmod +x /opt/app/v1/bin/video_app
+
+# Create VERSION file
+echo "1.0.0" > /opt/app/v1/VERSION
+
+# If this is the first installation, set up the symlink
+if [ ! -L /opt/app/current ]; then
+    ln -sfn /opt/app/v1 /opt/app/current
+    echo "v1" > /opt/app/metadata/active_slot
+    echo "v1" > /opt/app/metadata/last_known_good
+    echo "IDLE" > /opt/app/metadata/update_state
+fi
+
+echo "video-app v1 installation complete"
+exit 0

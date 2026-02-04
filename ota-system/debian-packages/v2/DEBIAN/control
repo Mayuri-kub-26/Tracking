@@ -1,0 +1,9 @@
+Package: video-app
+Version: 2.0.0
+Section: video
+Priority: optional
+Architecture: arm64
+Maintainer: Your Name <your.email@example.com>
+Description: Video Streaming Application - Version 2
+ This is version 2 of the video streaming application.
+ Streams black-and-white video.

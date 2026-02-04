@@ -1,0 +1,17 @@
+[Unit]
+Description=OTA Update Timer (runs every 5 minutes)
+Requires=ota-update.service
+
+[Timer]
+# Run every 5 minutes for faster urgent updates
+OnBootSec=2min
+OnUnitActiveSec=5min
+
+# Randomize start time by up to 30 seconds to avoid thundering herd
+RandomizedDelaySec=30s
+
+# Persist timer across reboots
+Persistent=true
+
+[Install]
+WantedBy=timers.target

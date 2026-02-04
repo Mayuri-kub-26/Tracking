@@ -1,0 +1,17 @@
+[Unit]
+Description=Tracker Python Application
+After=network-online.target mediamtx.service
+Requires=mediamtx.service
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=fwd
+WorkingDirectory=/home/fwd/Tracker
+ExecStart=/home/fwd/Tracker/scripts/wait_for_network.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
